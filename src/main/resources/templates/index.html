@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="HandheldFriendly" content="True">
+
+    <title>LearnTouch主页面</title>
+    <meta name="description" content="A simple side nav in jQuery.">
+
+    <link rel="stylesheet" href="/css/index.css"/>
+    <link rel="stylesheet" href="/css/normalize.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="./assets/js/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<header class="main-span">
+    <div class="title-span">
+        <div class="container-span">
+            <span><div>做题数</div></span>
+            <span><div>错误率</div></span>
+            <span><div>排名</div></span>
+        </div>
+    </div>
+</header>
+<div id="app">
+    <div class="navbar main" id="navbar-main">
+        <div class="person">
+            <li><span id="name-span">{{user}}</span></li>
+            <li><span id="blank-i">    </span></li>
+            <li><a href="/logout">退出</a> </li>
+        </div>
+        <div class="load-this">
+            <div id="sidebar-main-trigger" class="icon float-left">
+                <img src="/images/icon-menu-24px-x2.png" width="24" alt="Menu Icon"/>
+            </div>
+        </div><!--a ajax helper-->
+    </div>
+
+    <div class="sidebar main left" id="sidebar-main">
+        <div class="wrapper">
+            <nav>
+                <ul>
+                    <li><a><span class="icon-span"></span><span class="title-span">基本信息</span></a></li>
+                    <li><a><span class="icon-span"></span><span class="title-span">错题记录</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div><!--#sidebar-main-->
+</div>
+</body>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="http://www.jq22.com/jquery/jquery-ui-1.11.0.js"></script>
+<script src="/js/jquery.simpler-sidebar.min.js"></script>
+<script src="/js/main-sidebar-left-top.js"></script>
+<script src="/js/vue.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    let name = [[${username}]];
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                user: name
+            }
+        }
+    });
+</script>
+</html>

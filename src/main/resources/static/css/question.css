@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* CSS Document */
+.layer{
+	border: solid;
+	margin: 20px auto 20px auto;
+	height:600px;
+	width: 910px;
+	box-shadow: 5px 5px 5px #e1e3e9;
+}
+.type{
+	height: 100px;
+	width: 400px;
+	background-color: #E9E9E9;
+}
+
+.quest{
+	height: 100px;
+	width: 500px;
+}
+
+.answer{
+	height: 200px;
+	margin: 20px auto;
+	float: left;
+	margin:0 10px;
+}
+
+.chose{
+	width: 400px;
+	height: 200px;
+	background-color: #E9E9E9;
+	float: left;
+}
+
+.flash{
+	height: 400px;
+	width: 500px;
+	background-color: antiquewhite;
+}
+
+.text-left {
+	margin: auto;
+	height: 100px;
+}
+.button{
+	height: 50px;
+	width: 500px;
+}
+.quest_left {
+	width: 400px;
+	
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.text {
+	width: 400px;
+}
+
+.qtext { 
+  width:400px;   
+  margin-top:5px;  
+  border: solid 3px red; 
+}
+
+.one{
+	width:400px;
+	height: 200px;
+	overflow-x: hidden;
+	display: inline-block;
+}
+.all {
+	width: 440px;
+	height: 200px;
+}
+
+.f_l {
+	
+}

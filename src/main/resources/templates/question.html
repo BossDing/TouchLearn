@@ -1,119 +1,145 @@
 <!doctype html>
-<html>
+<html style="height: 100%" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" href="css/question.css">
-<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="Scripts/swfobject_modified.js"></script>
-<title>题目</title>
+    <meta charset="utf-8">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/question.css">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="Scripts/swfobject_modified.js"></script>
+    <title>题目</title>
 </head>
 
 <body>
-<div class="layer"> 
-  <!--右侧面板-->
-  <div class="left">
-    <div class="quest_left"> 
-      
-      <!--题目类型-->
-      <div class="type">
-        <p style="text-indent:2em;">长期放置在阳台上而未经移动的花草会朝着窗外的方向生长，为了让植物长得更挺直，在本次任务中，我们将研究光源、光源强度及光照时间对植物生长弯曲角度关系。</p>
-      </div>
-      
-      <!--题目-->
-      <div class="quest">
-        <p>1.在单侧光照射下，你认为植物会如何生长？</p>
-      </div>
-      
-		<div class="one">
-		
-      <!--选项-->
-		 <div class="all">
-<div class="chose">
-  <table width="200">
-          <tr>
-            <td><label>
-              <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_0">
-              A．直立向上生长</label></td>
-          </tr>
-          <tr>
-            <td><label>
-              <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1">
-              B．朝光源生长</label></td>
-          </tr>
-          <tr>
-            <td><label>
-              <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_2">
-              C．背光生长</label></td>
-          </tr>
-          <tr>
-            <td><label>
-              <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_3">
-              D. 与光源不存在明显关系</label></td>
-          </tr>
-        </table>
+<div id="app">
+    <div class="layer">
+        <!--右侧面板-->
+        <div class="left">
+            <div class="quest_left">
+
+                <!--题目类型-->
+                <div class="type">
+                    <p style="text-indent:2em;">
+                        {{question.questionParentDesc}}
+                    </p>
+                </div>
+                <!--题目-->
+                <div class="quest">
+                    <p>{{quest_desc}}</p>
+                </div>
+                <div class="one">
+                    <!--选项-->
+                    <div class="all">
+                        <div class="chose" v-if="isChoose == true">
+                            <table width="200">
+                                <tr>
+                                    <td><label>
+                                        <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_0">
+                                        {{nowQuestion.chooses[0].chooseCode +
+                                        nowQuestion.chooses[0].chooseContext}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label>
+                                        <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1">
+                                        {{nowQuestion.chooses[1].chooseCode +
+                                        nowQuestion.chooses[1].chooseContext}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label>
+                                        <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_2">
+                                        {{nowQuestion.chooses[2].chooseCode +
+                                        nowQuestion.chooses[2].chooseContext}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td><label>
+                                        <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_3">
+                                        {{nowQuestion.chooses[3].chooseCode +
+                                        nowQuestion.chooses[3].chooseContext}}</label></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!--简答-->
+                        <div class="answer" v-else>
+                            <textarea class="text" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--右侧面板-->
+        <div class="right">
+
+            <!--按钮-->
+            <div aligin="center" class="button">
+                <button type="button" @click="pre">上一题</button>
+                <button type="button" @click="next">下一题</button>
+                <button type="button">退出</button>
+            </div>
+
+            <!--flash-->
+            <div class="flash">
+
+            </div>
+
+            <!--Excel表格-->
+            <div>
+
+            </div>
+        </div>
     </div>
-      
-      <!--简答-->
-      <div class="answer">
-        <textarea class="text" rows="5"></textarea>
-      </div>
-    </div>
-  </div>
-	  </div>
-	  </div>
-  
-  <!--右侧面板-->
-  <div class="right"> 
-    
-    <!--按钮-->
-    <div aligin="center" class="button">
-      <button type="button">上一题</button>
-      <button type="button">下一题</button>
-      <button type="button">退出</button>
-    </div>
-    
-    <!--flash-->
-    <div class="flash">
-      <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="400">
-        <param name="movie" value="fla/向光性.swf" />
-        <param name="quality" value="high" />
-        <param name="wmode" value="opaque" />
-        <param name="swfversion" value="6.0.65.0" />
-        <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-        <param name="expressinstall" value="Scripts/expressInstall.swf" />
-        <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 --> 
-        <!--[if !IE]>-->
-        <object type="application/x-shockwave-flash" data="fla/向光性.swf" width="500" height="400">
-          <!--<![endif]-->
-          <param name="quality" value="high" />
-          <param name="wmode" value="opaque" />
-          <param name="swfversion" value="6.0.65.0" />
-          <param name="expressinstall" value="Scripts/expressInstall.swf" />
-          <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-          <div>
-            <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-            <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p>
-          </div>
-          <!--[if !IE]>-->
-        </object>
-        <!--<![endif]-->
-      </object>
-    </div>
-    
-    <!--Excel表格--> 
-    <div>
-		
-	  </div>
-  </div>
 </div>
-<script type="text/javascript">
-swfobject.registerObject("FlashID");
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    // swfobject.registerObject("FlashID");
+    let index = 0;
+    let questionString = [[${question}]];
+    let nowQuestion = questionString.questions[index];
+    let desc = questionString.questionParentDesc;
+    let quest_desc = nowQuestion.questionDesc;
+    let isChoose = nowQuestion.questionIsChoose;
+    let choose1 = nowQuestion.chooses[1];
+
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                question: questionString,
+                questionString: questionString,
+                quest_desc: quest_desc,
+                isChoose: isChoose,
+                choose1: choose1,
+                nowQuestion: nowQuestion
+            }
+        },
+        methods: {
+            next() {
+                index = index + 1;
+                console.log(index);
+            },
+
+            pre() {
+                index = index - 1;
+                console.log(index);
+            }
+        },
+        watch: {
+            index: function (newIndex, oldIndex) {
+                this.nowQuestion = questionString.questions[index];
+            }
+        }
+    })
 </script>
 </body>
 </html>

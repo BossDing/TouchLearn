@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html style="height: 100%" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header>题目列表</el-header>
+        <el-main>
+            <el-table :data="questions">
+                <el-table-column prop="id" label="序号" width="100px">
+                </el-table-column>
+                <el-table-column prop="questionParentDesc" label="描述">
+                </el-table-column>
+                <el-table-column
+                        fixed="right"
+                        label="操作"
+                        width="100">
+                    <template slot-scope="scope">
+                        <el-button @click="getQuestion(scope.row.id)" type="text" size="small">查看</el-button>
+                        <el-button type="text" size="small">编辑</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-main>
+        <el-footer>-------- 底线 --------</el-footer>
+    </el-container>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    let questions = [[${questions}]];
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                questions: questions
+            }
+        },
+        methods: {
+            getQuestion(id) {
+                window.location.href = '/question/id/parent/' + id + '';
+            }
+        }
+    });
+
+</script>
+<style>
+    .el-header {
+        background-color: rgba(179, 192, 209, 0.11);
+        color: #333;
+        text-align: center;
+        font-size: 1.5em;
+        line-height: 60px;
+    }
+
+    .el-footer {
+        background-color: rgba(179, 192, 209, 0.11);
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+    }
+
+    .el-aside {
+        background-color: #D3DCE6;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+
+    .el-main {
+        background-color: #E9EEF3;
+        color: #333;
+        text-align: center;
+        /*line-height: 0px;*/
+    }
+
+    body > .el-container {
+        margin-bottom: 40px;
+    }
+
+    .el-container:nth-child(5) .el-aside,
+    .el-container:nth-child(6) .el-aside {
+        line-height: 260px;
+    }
+
+    .el-container:nth-child(7) .el-aside {
+        line-height: 320px;
+    }
+</style>
+</html>

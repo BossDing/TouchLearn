@@ -43,8 +43,20 @@
             <property name="rootInterface" value=""/>
         </javaClientGenerator>
 
-        <table tableName="user_info" domainObjectName="UserInfo">
-            <generatedKey column="user_id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+        <!--<table tableName="animation" domainObjectName="Animation">-->
+            <!--<generatedKey column="an_ID" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>-->
+        <!--</table>-->
+        <!--<table tableName="answer" domainObjectName="Answer">-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>-->
+        <!--</table>-->
+        <table tableName="choose" domainObjectName="Choose">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
         </table>
+        <!--<table tableName="question" domainObjectName="Question">-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>-->
+        <!--</table>-->
+        <!--<table tableName="question_parent" domainObjectName="QuestionParent">-->
+            <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

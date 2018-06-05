@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheyfly.touchlearn.common.dao.ChooseMapper">
+    <resultMap id="BaseResultMap" type="com.cheyfly.touchlearn.common.pojo.Choose">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="choose_code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="choose_context" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="question_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from choose
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.cheyfly.touchlearn.common.pojo.Choose">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into choose (choose_code, choose_context, question_id
+        )
+        values (#{chooseCode,jdbcType=VARCHAR}, #{chooseContext,jdbcType=VARCHAR}, #{questionId,jdbcType=VARCHAR}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.cheyfly.touchlearn.common.pojo.Choose">
+    update choose
+    set choose_code = #{chooseCode,jdbcType=VARCHAR},
+      choose_context = #{chooseContext,jdbcType=VARCHAR},
+      question_id = #{questionId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, choose_code, choose_context, question_id
+    from choose
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, choose_code, choose_context, question_id
+    from choose
+  </select>
+    <select id="selectByQuestionId" resultMap="BaseResultMap">
+    select id, choose_code, choose_context, question_id
+    from choose
+    where question_id = #{questionId,jdbcType=VARCHAR}
+  </select>
+</mapper>

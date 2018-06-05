@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheyfly.touchlearn.common.dao.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.cheyfly.touchlearn.common.pojo.Answer" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="answer_type_is_choose" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="answer_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="question_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from answer
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cheyfly.touchlearn.common.pojo.Answer" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into answer (answer_type_is_choose, answer_content, question_id
+      )
+    values (#{answerTypeIsChoose,jdbcType=BIT}, #{answerContent,jdbcType=VARCHAR}, #{questionId,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cheyfly.touchlearn.common.pojo.Answer" >
+    update answer
+    set answer_type_is_choose = #{answerTypeIsChoose,jdbcType=BIT},
+      answer_content = #{answerContent,jdbcType=VARCHAR},
+      question_id = #{questionId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, answer_type_is_choose, answer_content, question_id
+    from answer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, answer_type_is_choose, answer_content, question_id
+    from answer
+  </select>
+</mapper>

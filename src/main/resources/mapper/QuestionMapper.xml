@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheyfly.touchlearn.common.dao.QuestionMapper">
+    <resultMap id="BaseResultMap" type="com.cheyfly.touchlearn.common.pojo.Question">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="question_desc" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="question_is_choose" jdbcType="BIT" javaType="java.lang.Boolean"/>
+            <arg column="question_parent_id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        </constructor>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from question
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.cheyfly.touchlearn.common.pojo.Question">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into question (question_desc, question_is_choose, question_parent_id
+        )
+        values (#{questionDesc,jdbcType=VARCHAR}, #{questionIsChoose,jdbcType=BIT}, #{questionParentId,jdbcType=BIGINT}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.cheyfly.touchlearn.common.pojo.Question">
+    update question
+    set question_desc = #{questionDesc,jdbcType=VARCHAR},
+      question_is_choose = #{questionIsChoose,jdbcType=BIT},
+      question_parent_id = #{questionParentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, question_desc, question_is_choose, question_parent_id
+    from question
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, question_desc, question_is_choose, question_parent_id
+    from question
+  </select>
+    <select id="selectByParentId" resultMap="BaseResultMap">
+    select id, question_desc, question_is_choose, question_parent_id
+    from question
+    where question_parent_id = #{questionParentId,jdbcType=BIGINT}
+  </select>
+</mapper>
